@@ -18,6 +18,7 @@ import DatabaseView from './components/DatabaseView';
 import Onboarding from './components/Onboarding';
 import FocusStudy from './components/FocusStudy';
 import HomeView from './components/HomeView';
+import ZenCopilot from './components/ZenCopilot';
 import { 
   ChevronRight, Star, ExternalLink, HelpCircle, Sparkles, BookOpen, Clock, 
   Settings, Users, Info, ArrowUpRight, Compass, CompassIcon, X, Check, Menu
@@ -31,6 +32,7 @@ export default function App() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(true); // Default to gorgeous dark mode!
   const [showWelcomeGuide, setShowWelcomeGuide] = useState(false);
+  const [isCopilotOpen, setIsCopilotOpen] = useState(false);
 
   // Collapsible Sidebar States
   const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
@@ -465,6 +467,20 @@ export default function App() {
             )}
 
             <button
+              onClick={() => setIsCopilotOpen(!isCopilotOpen)}
+              className={`p-2 rounded-xl border border-slate-200/50 dark:border-white/5 shadow-sm transition-all flex items-center gap-1.5 cursor-pointer ${
+                isCopilotOpen
+                  ? 'text-pink-500 dark:text-pink-300 bg-pink-500/5 dark:bg-pink-500/10 border-pink-500/20'
+                  : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/5'
+              }`}
+              title="Zen Copilot"
+              id="header-copilot-btn"
+            >
+              <Sparkles size={14} className={isCopilotOpen ? 'animate-pulse' : ''} />
+              <span className="text-[11px] font-semibold tracking-wide hidden sm:inline">Zen Copilot</span>
+            </button>
+
+            <button
               onClick={() => setShowWelcomeGuide(!showWelcomeGuide)}
               className="p-2 rounded-xl border border-slate-200/50 dark:border-white/5 shadow-sm text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/5 transition-all"
               title="Zen Guide"
@@ -748,6 +764,14 @@ export default function App() {
           </div>
         )}
       </AnimatePresence>
+
+      {/* Zen Copilot AI Panel */}
+      <ZenCopilot
+        isOpen={isCopilotOpen}
+        onClose={() => setIsCopilotOpen(false)}
+        activePage={activePage || null}
+        onUpdatePageBlocks={handleUpdatePageBlocks}
+      />
     </div>
   );
 }
