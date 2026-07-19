@@ -1,0 +1,8 @@
+{
+  "name": "Zen",
+  "description": "A Notion-like minimalist block-based workspace with databases, Kanban boards, hierarchical pages, search, and a beautiful pastel dark mode.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
